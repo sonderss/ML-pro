@@ -140,8 +140,8 @@
 				list3:[],
 				list4:[],//新数组，处理后的数组
 				uid1:1,
-				list5:[]//为你推荐
-				  
+				list5:[],//为你推荐
+				bool:false
 		    }
 		},
 	  methods: {
@@ -161,13 +161,21 @@
 		  },
 		  lq(name,id){
 			  this.uid1 = Math.ceil(Math.random()*8) 
-			  axios({
-				  method:'post',
-				  url:'http://106.12.52.107:8081/MeledMall/menu/childMenu',
-				  params:{id:this.uid1}
-			  }).then((data)=>{
-				this.list5 = data.data.info
-			  })
+			  var bool1 = name
+			  console.log(this.bool)
+			  if(bool1 == 0){
+				  this.bool = true
+				  if(this.bool){
+						axios({
+							method:'post',
+							url:'http://106.12.52.107:8081/MeledMall/menu/childMenu',
+							params:{id:this.uid1}
+						}).then((data)=>{
+							this.list5 = data.data.info
+						})  
+				  }
+			  }
+			
 		  },
 	    onRefresh() {
 	      setTimeout(() => {
@@ -191,6 +199,7 @@
 				  params:{id:3}
 			  }).then((data)=>{
 				this.list5 = data.data.info
+				this.bool = false
 			  })
 	    	axios({
 	    		method:"post",
